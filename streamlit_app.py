@@ -185,7 +185,7 @@ elif st.session_state.page == "Prédiction":
 
     # Formulaire de saisie
     form_data = {}
-    for col in data.columns.drop("SalePrice"):
+    for col in data.columns.drop("Prix de vente de la maison"):
         if data[col].dtype == 'object':
             # Champ de saisie de texte pour les variables catégorielles
             form_data[col] = st.selectbox(f"{col}", data[col].unique())
@@ -217,8 +217,8 @@ elif st.session_state.page == "Performance":
     # Calcul de la performance sur un jeu de test
     data2=data
     data2 = pipeline.transform(data2)
-    X_test = data2.drop(columns=["SalePrice"])  # Remplacer "price" par la colonne cible
-    y_test = data2["SalePrice"]  # Assurez-vous que "price" est la colonne cible
+    X_test = data2.drop(columns=[""Prix de vente de la maison""])  # Remplacer "price" par la colonne cible
+    y_test = data2["Prix de vente de la maison"]  # Assurez-vous que "price" est la colonne cible
 
     y_pred = ridge_model.predict(X_test)
 
