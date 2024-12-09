@@ -282,7 +282,7 @@ elif st.session_state.page == "Prédiction":
 
 # Section Performance
 elif st.session_state.page == "Performance":
-    st.subheader("📈 Évaluation des Performances du Modèle")
+    st.subheader("📈 Évaluation des performances du Modèle")
     st.write("Examinez les performances des modèles utilisés pour la prédiction des prix.")
     
     if st.checkbox("Afficher les données brutes de test"):
