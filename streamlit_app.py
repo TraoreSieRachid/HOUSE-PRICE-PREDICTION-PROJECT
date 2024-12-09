@@ -28,8 +28,8 @@ def load_data2():
     return pd.read_csv("data/test_df.csv")  # Remplacez par le chemin réel de vos données
 
 
-data2 = load_data1()
-data = load_data2()
+data = load_data1()
+data2 = load_data2()
 labels = {
     "MSSubClass": "Type de logement impliqué dans la vente",
     "MSZoning": "Classification générale de zonage de la vente",
