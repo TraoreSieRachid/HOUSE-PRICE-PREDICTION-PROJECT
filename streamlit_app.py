@@ -316,3 +316,17 @@ elif st.session_state.page == "Performance":
         col.subheader(f"Les performances du modèle {model_name} ")
         col.dataframe(df)
         col.write("---")
+
+        #Diagramme en barres pour les performances
+        fig, ax = plt.subplots(figsize=(6, 4))
+        x = range(len(df))
+        bar_width = 0.4
+
+        ax.bar(x, df["train"], width=bar_width, label="Train", color="skyblue", align="center")
+        ax.bar([p + bar_width for p in x], df["test"], width=bar_width, label="Test", color="salmon", align="center")
+        ax.set_xticks([p + bar_width / 2 for p in x])
+        ax.set_xticklabels(df["metric"], rotation=45, ha="right")
+        ax.set_title(f"Performances du modèle {model_name}")
+        ax.legend()
+
+        st.pyplot(fig)
