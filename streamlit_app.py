@@ -205,22 +205,7 @@ elif st.session_state.page == "Prédiction":
             max_value=float(max_val),
             value=float(min_val)
         )
-"""
-    # Inverser le dictionnaire pour trouver les clés brutes à partir des libellés
-    reverse_labels = {v: k for k, v in labels.items()}
-    # Formulaire de saisie
-    form_data = {}
-    for col in data.columns.drop("Prix de vente de la maison"):
-        col_raw=labels[]
-        if data[col].dtype == 'object':
-            # Champ de saisie de texte pour les variables catégorielles
-            form_data[col_raw] = st.selectbox(f"{col}", data[col].unique())
-        elif data[col].dtype in ['int64', 'float64']:
-            # Champ de saisie numérique pour les variables numériques
-            min_val = data[col].min()
-            max_val = data[col].max()
-            form_data[col_raw] = st.number_input(f"{col}", min_value=float(min_val), max_value=float(max_val), value=float(min_val))
-"""
+    
     # Bouton pour lancer la prédiction
     if st.button("Prédire le Prix"):
         st.write("Lancer la prédiction avec les valeurs suivantes :")
