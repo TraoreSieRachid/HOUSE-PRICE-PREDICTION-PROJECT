@@ -94,7 +94,7 @@ if "page" not in st.session_state:
     st.session_state.page = "Accueil"
 
 # Titre de l'application
-st.title("Application de prédiction des prix immobiliers")
+st.title("🏡 **Application de Prédiction des Prix Immobiliers**")
 
 # Fonction pour changer la page active dans st.session_state
 def set_page(page_name):
@@ -118,7 +118,6 @@ with col4:
 # Section Accueil
 if st.session_state.page == "Accueil":
     # Titre principal
-    st.title("🏡 **Application de Prédiction des Prix Immobiliers**")
     st.write("---")  # Ligne de séparation
 
     # Sous-titre de bienvenue
