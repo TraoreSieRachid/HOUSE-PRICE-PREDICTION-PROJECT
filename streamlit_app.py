@@ -297,18 +297,23 @@ elif st.session_state.page == "Performance":
         st.dataframe(data2)
     st.write("---")
 
-    # Supposons que ridge_cv_performance1, ridge_cv_performance2, ..., ridge_cv_performance9 soient vos DataFrames
+    # Liste des DataFrames
     dataframes = [ridge_cv_performance, lr_performance, cat_cv_performance,
                 GBR_cv_performance, lgbm_cv_performance, vr_performance,
                 stackreg_performance, xgb_cv_performance, rfr_cv_performance]
-    
+
+    # Liste des noms des modèles correspondants
+    model_names = ["Ridge", "Logistic Regression", "CatBoost", 
+                "Gradient Boosting Regressor", "LightGBM", "Voting Regressor",
+                "Stacking Regressor", "XGBoost", "Random Forest Regressor"]
+
     # Créer une grille avec 3 colonnes
     cols = st.columns(3)
 
     # Afficher les DataFrames dans la grille
-    for i, df in enumerate(dataframes):
+    for i, (df, model_name) in enumerate(zip(dataframes, model_names)):
         col = cols[i % 3]  # Sélectionner la colonne appropriée
-        col.subheader(f"Les performances du modèle {df} {i+1}")
+        col.subheader(f"Les performances du modèle {model_name} {i+1}")
         col.dataframe(df)
         if (i + 1) % 3 != 0:
             col.write("---")
