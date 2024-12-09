@@ -117,7 +117,6 @@ with col4:
 
 # Section Accueil
 if st.session_state.page == "Accueil":
-    # Titre principal
     st.write("---")  # Ligne de séparation
 
     # Sous-titre de bienvenue
@@ -177,15 +176,18 @@ if st.session_state.page == "Accueil":
 elif st.session_state.page == "Analyse":
     st.subheader("📊 Analyse des Données")
     st.write("Exploration des données des prix immobiliers.")
+    st.write("---")
 
     # Affichage des données brutes si l'option est activée
     if st.checkbox("Afficher les données brutes"):
         st.subheader("Données des prix immobiliers")
         st.dataframe(data)
+    st.write("---")
 
     # Statistiques descriptives
     st.write("### Statistiques descriptives")
     st.write(data.describe())
+    st.write("---")
 
     # Sélection des variables pour la visualisation
     st.write("### Visualisation de deux variables")
@@ -217,6 +219,7 @@ elif st.session_state.page == "Analyse":
         ax.tick_params(axis='both', which='major', labelsize=12)
 
     st.pyplot(fig)
+    st.write("---")
 
     # Matrice de corrélation
     st.write("### Matrice de Corrélation")
@@ -226,7 +229,8 @@ elif st.session_state.page == "Analyse":
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", fmt=".1f", ax=ax_corr, cbar=True, annot_kws={'size': 10}, mask=mask)
     ax_corr.set_title("Matrice de Corrélation")
     st.pyplot(fig_corr)
-
+    st.write("---")
+    
 # Section Prédiction des prix
 elif st.session_state.page == "Prédiction":
     st.subheader("🔍 Prédiction des Prix")
