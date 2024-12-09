@@ -18,7 +18,14 @@ ridge_model = load_ridge_model()
 
 pipeline = joblib.load('code/pipeline.pkl')
 ridge_cv_performance = joblib.load('code/ridge_cv_performance.pkl')
-
+lr_performance = joblib.load('code/lr_performance.pkl')
+cat_cv_performance = joblib.load('code/cat_cv_performance.pkl')
+GBR_cv_performance = joblib.load('code/GBR_cv_performance.pkl')
+lgbm_cv_performance = joblib.load('code/lgbm_cv_performance.pkl')
+vr_performance = joblib.load('code/vr_performance.pkl')
+stackreg_performance = joblib.load('code/stackreg_performance.pkl')
+xgb_cv_performance = joblib.load('code/xgb_cv_performance.pkl')
+rfr_cv_performance = joblib.load('code/rfr_cv_performance.pkl')
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
 def load_data1():
@@ -290,6 +297,18 @@ elif st.session_state.page == "Performance":
         st.dataframe(data2)
     st.write("---")
 
-    st.subheader("les performances du modèle ridge")
-    st.dataframe(ridge_cv_performance)
-    st.write("---")
+    # Supposons que ridge_cv_performance1, ridge_cv_performance2, ..., ridge_cv_performance9 soient vos DataFrames
+    dataframes = [ridge_cv_performance, lr_performance, cat_cv_performance,
+                GBR_cv_performance, lgbm_cv_performance, vr_performance,
+                stackreg_performance, xgb_cv_performance, rfr_cv_performance]
+    
+    # Créer une grille avec 3 colonnes
+    cols = st.columns(3)
+
+    # Afficher les DataFrames dans la grille
+    for i, df in enumerate(dataframes):
+        col = cols[i % 3]  # Sélectionner la colonne appropriée
+        col.subheader(f"Les performances du modèle ridge {i+1}")
+        col.dataframe(df)
+        if (i + 1) % 3 != 0:
+            col.write("---")
