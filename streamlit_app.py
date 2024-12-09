@@ -17,12 +17,20 @@ def load_ridge_model():
 ridge_model = load_ridge_model()
 
 pipeline = joblib.load('code/pipeline.pkl')
+ridge_cv_performance = joblib.load('code/ridge_cv_performance.pkl')
 
 # Fonction pour charger les données (mise en cache)
 @st.cache_data
 def load_data():
     return pd.read_csv("data/train_df.csv")  # Remplacez par le chemin réel de vos données
 
+# Fonction pour charger les données (mise en cache)
+@st.cache_data
+def load_data():
+    return pd.read_csv("data/test_df.csv")  # Remplacez par le chemin réel de vos données
+
+
+data2 = load_data()
 data = load_data()
 labels = {
     "MSSubClass": "Type de logement impliqué dans la vente",
@@ -88,7 +96,7 @@ labels = {
 }
 
 data=data.rename(columns=labels)
-
+data2=data2.rename(columns=labels)
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
@@ -277,20 +285,26 @@ elif st.session_state.page == "Prédiction":
 elif st.session_state.page == "Performance":
     st.subheader("📈 Évaluation des Performances du Modèle")
     st.write("Examinez les performances des modèles utilisés pour la prédiction des prix.")
+    
+    if st.checkbox("Afficher les données brutes de test"):
+        st.subheader("Données des prix immobiliers")
+        st.dataframe(data2)
+    st.write("---")
 
-    # Calcul de la performance sur un jeu de test
-    data2=data
-    data2 = pipeline.transform(data2)
-    X_test = data2.drop(columns=["Prix de vente de la maison"])  # Remplacer "price" par la colonne cible
-    y_test = data2["Prix de vente de la maison"]  # Assurez-vous que "price" est la colonne cible
+    st.subheader("les performances du modèle ridge")
+    st.dataframe(ridge_cv_performance)
+    st.write("---")
+    #data2 = pipeline.transform(data2)
+    #X_test = data2.drop(columns=["Prix de vente de la maison"])  # Remplacer "price" par la colonne cible
+    #y_test = data2["Prix de vente de la maison"]  # Assurez-vous que "price" est la colonne cible
 
-    y_pred = ridge_model.predict(X_test)
+    #y_pred = ridge_model.predict(X_test)
 
     # Affichage des métriques de performance
-    mae = mean_absolute_error(y_test, y_pred)
-    mse = mean_squared_error(y_test, y_pred)
-    rmse = np.sqrt(mse)
+    #mae = mean_absolute_error(y_test, y_pred)
+    #mse = mean_squared_error(y_test, y_pred)
+    #rmse = np.sqrt(mse)
 
-    st.write(f"Erreur Absolue Moyenne (MAE) : {mae:,.2f}")
-    st.write(f"Erreur Quadratique Moyenne (MSE) : {mse:,.2f}")
-    st.write(f"Racine de l'Erreur Quadratique Moyenne (RMSE) : {rmse:,.2f}")
+    #st.write(f"Erreur Absolue Moyenne (MAE) : {mae:,.2f}")
+    #st.write(f"Erreur Quadratique Moyenne (MSE) : {mse:,.2f}")
+    #st.write(f"Racine de l'Erreur Quadratique Moyenne (RMSE) : {rmse:,.2f}")
