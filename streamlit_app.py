@@ -191,20 +191,19 @@ elif st.session_state.page == "Prédiction":
     for col_label in labels.values():
     # Trouver la clé brute
         col_raw = reverse_labels[col_label]
-
-    if data[col_raw].dtype == 'object':
-        # Champ de sélection pour les variables catégorielles
-        form_data[col_raw] = st.selectbox(f"{col_label}", data[col_raw].unique())
-    elif data[col_raw].dtype in ['int64', 'float64']:
-        # Champ de saisie numérique pour les variables numériques
-        min_val = data[col_raw].min()
-        max_val = data[col_raw].max()
-        form_data[col_raw] = st.number_input(
-            f"{col_label}",
-            min_value=float(min_val),
-            max_value=float(max_val),
-            value=float(min_val)
-        )
+        if data[col_raw].dtype == 'object':
+            # Champ de sélection pour les variables catégorielles
+            form_data[col_raw] = st.selectbox(f"{col_label}", data[col_raw].unique())
+        elif data[col_raw].dtype in ['int64', 'float64']:
+            # Champ de saisie numérique pour les variables numériques
+            min_val = data[col_raw].min()
+            max_val = data[col_raw].max()
+            form_data[col_raw] = st.number_input(
+                f"{col_label}",
+                min_value=float(min_val),
+                max_value=float(max_val),
+                value=float(min_val)
+            )
     
     # Bouton pour lancer la prédiction
     if st.button("Prédire le Prix"):
