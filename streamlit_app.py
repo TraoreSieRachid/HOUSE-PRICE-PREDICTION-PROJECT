@@ -117,39 +117,62 @@ with col4:
 
 # Section Accueil
 if st.session_state.page == "Accueil":
-    st.subheader("🏠 Bienvenue dans l'application de prédiction des prix immobiliers")
+    # Titre principal
+    st.title("🏡 **Application de Prédiction des Prix Immobiliers**")
+    st.write("---")  # Ligne de séparation
+
+    # Sous-titre de bienvenue
+    st.header("Bienvenue 👋")
     st.write("""
-        Cette application vous permet de :
-        - Prédire les prix des maisons
-        - Analyser les données des prix immobiliers
-        - Évaluer les performances des modèles de prédiction
+        Cette application vous offre des outils intuitifs pour :
+        - 🏘️ Prédire les **prix des maisons** à partir de caractéristiques clés.
+        - 📊 Analyser les **tendances des prix immobiliers** dans des zones spécifiques.
+        - 🛠️ Évaluer les **performances des modèles de prédiction** et leurs ajustements.
     """)
 
-    st.subheader("🏠 Description des données brutes")
+    # Description des données
+    st.header("📂 Description des Données Brutes")
+    st.write("""
+        Voici un aperçu des données utilisées pour nos analyses et prédictions. 
+        Ces informations décrivent les différentes variables et leurs catégories associées.
+    """)
+
     # Chemin vers le fichier texte
     file_path = "Ressources/data_description.txt"
 
-    # Lire le contenu du fichier
+    # Lire et afficher le fichier
     try:
         with open(file_path, "r") as file:
             description = file.read()
     except FileNotFoundError:
-        st.error(f"Le fichier '{file_path}' est introuvable.")
+        st.error(f"🚨 Le fichier '{file_path}' est introuvable. Veuillez vérifier son emplacement.")
         st.stop()
 
-    # Afficher le contenu du fichier dans l'application
-    st.text_area("Aperçu du contenu :", description, height=200)
+    # Texte enrichi avec une barre défilante
+    st.text_area(
+        "🔍 **Aperçu du fichier de description :**",
+        description,
+        height=300,
+        placeholder="Le contenu du fichier sera affiché ici..."
+    )
 
-    st.write("""
-        Vous pouvez télécharger en dessous une description des données brutes utilisés.
-    """)
     # Télécharger le fichier texte
+    st.write("""
+        📥 **Téléchargez la description complète des données en cliquant ci-dessous :**
+    """)
     st.download_button(
-        label="Télécharger le fichier texte",
+        label="Télécharger le fichier de description 📄",
         data=description,
         file_name="description.txt",
-        mime="text/plain"
+        mime="text/plain",
+        help="Téléchargez le fichier texte contenant les descriptions des données utilisées dans l'application."
     )
+
+    # Complément sur l'utilisation
+    st.write("---")
+    st.info("""
+        ℹ️ **Astuce :** Utilisez la barre de navigation pour explorer les fonctionnalités comme la prédiction des prix ou l'analyse des performances des modèles.
+    """)
 
 # Section Analyse des données
 elif st.session_state.page == "Analyse":
