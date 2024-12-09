@@ -294,18 +294,3 @@ elif st.session_state.page == "Performance":
     st.subheader("les performances du modèle ridge")
     st.dataframe(ridge_cv_performance)
     st.write("---")
-    
-    #data2 = pipeline.transform(data2)
-    #X_test = data2.drop(columns=["Prix de vente de la maison"])  # Remplacer "price" par la colonne cible
-    #y_test = data2["Prix de vente de la maison"]  # Assurez-vous que "price" est la colonne cible
-
-    #y_pred = ridge_model.predict(X_test)
-
-    # Affichage des métriques de performance
-    #mae = mean_absolute_error(y_test, y_pred)
-    #mse = mean_squared_error(y_test, y_pred)
-    #rmse = np.sqrt(mse)
-
-    #st.write(f"Erreur Absolue Moyenne (MAE) : {mae:,.2f}")
-    #st.write(f"Erreur Quadratique Moyenne (MSE) : {mse:,.2f}")
-    #st.write(f"Racine de l'Erreur Quadratique Moyenne (RMSE) : {rmse:,.2f}")
