@@ -88,6 +88,7 @@ labels = {
 }
 
 data=data.rename(columns=labels)
+
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
     st.session_state.page = "Accueil"
