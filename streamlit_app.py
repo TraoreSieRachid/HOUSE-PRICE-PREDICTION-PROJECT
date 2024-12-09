@@ -303,7 +303,7 @@ elif st.session_state.page == "Performance":
                 stackreg_performance, xgb_cv_performance, rfr_cv_performance]
 
     # Liste des noms des modèles correspondants
-    model_names = ["Ridge", "Logistic Regression", "CatBoost", 
+    model_names = ["Ridge", "Linear Regression", "CatBoost", 
                 "Gradient Boosting Regressor", "LightGBM", "Voting Regressor",
                 "Stacking Regressor", "XGBoost", "Random Forest Regressor"]
 
