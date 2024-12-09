@@ -194,7 +194,7 @@ elif st.session_state.page == "Prédiction":
         if data[col_label].dtype == 'object':
             # Champ de sélection pour les variables catégorielles
             form_data[col_raw] = st.selectbox(f"{col_label}", data[col_label].unique())
-        elif data[col_raw].dtype in ['int64', 'float64']:
+        elif data[col_label].dtype in ['int64', 'float64']:
             # Champ de saisie numérique pour les variables numériques
             min_val = data[col_label].min()
             max_val = data[col_label].max()
