@@ -209,7 +209,8 @@ elif st.session_state.page == "Prédiction":
     if st.button("Prédire le Prix"):
         st.write("Lancer la prédiction avec les valeurs suivantes :")
         input_data = pd.DataFrame([form_data])
-        st.write("Vérification des données d'entrée avant prédiction :", input_data)
+        input_data_label=input_data.rename(columns=labels)
+        st.write("Vérification des données d'entrée avant prédiction :", input_data_label)
 
         # Prédiction
         try:
