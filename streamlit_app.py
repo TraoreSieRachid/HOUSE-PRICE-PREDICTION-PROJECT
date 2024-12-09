@@ -313,7 +313,6 @@ elif st.session_state.page == "Performance":
     # Afficher les DataFrames dans la grille
     for i, (df, model_name) in enumerate(zip(dataframes, model_names)):
         col = cols[i % 3]  # Sélectionner la colonne appropriée
-        col.subheader(f"Les performances du modèle {model_name}")
+        col.subheader(f"Les performances du modèle {model_name} ")
         col.dataframe(df)
-        if (i + 1) % 3 != 0:
-            col.write("---")
+        col.write("---")
