@@ -24,12 +24,12 @@ ridge_cv_performance = joblib.load('code/ridge_cv_performance.pkl')
 def load_data1():
     return pd.read_csv("data/train_df.csv")  # Remplacez par le chemin réel de vos données
 
-def load_data2():
-    return pd.read_csv("data/test_df.csv")  # Remplacez par le chemin réel de vos données
+#def load_data2():
+#    return pd.read_csv("data/test_df.csv")  # Remplacez par le chemin réel de vos données
 
 
 data = load_data1()
-data2 = load_data2()
+#data2 = load_data2()
 labels = {
     "MSSubClass": "Type de logement impliqué dans la vente",
     "MSZoning": "Classification générale de zonage de la vente",
@@ -94,7 +94,7 @@ labels = {
 }
 
 data=data.rename(columns=labels)
-data2=data2.rename(columns=labels)
+#data2=data2.rename(columns=labels)
 
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
@@ -287,7 +287,7 @@ elif st.session_state.page == "Performance":
     
     if st.checkbox("Afficher les données brutes de test"):
         st.subheader("Données des prix immobiliers")
-        st.dataframe(data2)
+        st.dataframe(data1)
     st.write("---")
 
     st.subheader("les performances du modèle ridge")
