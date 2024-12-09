@@ -190,7 +190,7 @@ elif st.session_state.page == "Prédiction":
     form_data = {}
     for col_label in labels.values():
     # Trouver la clé brute
-    col_raw = reverse_labels[col_label]
+        col_raw = reverse_labels[col_label]
 
     if data[col_raw].dtype == 'object':
         # Champ de sélection pour les variables catégorielles
