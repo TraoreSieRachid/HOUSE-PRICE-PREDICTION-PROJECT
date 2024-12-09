@@ -124,9 +124,8 @@ if st.session_state.page == "Accueil":
         - Analyser les données des prix immobiliers
         - Évaluer les performances des modèles de prédiction
     """)
-    # Titre de l'application
-    st.title("Téléchargement d'un fichier texte existant")
 
+    st.subheader("🏠 Description des données brutes")
     # Chemin vers le fichier texte
     file_path = "Ressources/data_description.txt"
 
@@ -232,7 +231,7 @@ elif st.session_state.page == "Prédiction":
                 max_value=float(max_val),
                 value=float(min_val)
             )
-            
+
     # Bouton pour lancer la prédiction
     if st.button("Prédire le Prix"):
         st.write("Lancer la prédiction avec les valeurs suivantes :")
