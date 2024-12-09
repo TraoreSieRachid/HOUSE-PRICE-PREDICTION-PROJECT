@@ -124,6 +124,33 @@ if st.session_state.page == "Accueil":
         - Analyser les données des prix immobiliers
         - Évaluer les performances des modèles de prédiction
     """)
+    # Titre de l'application
+    st.title("Téléchargement d'un fichier texte existant")
+
+    # Chemin vers le fichier texte
+    file_path = "Ressources/data_description.txt"
+
+    # Lire le contenu du fichier
+    try:
+        with open(file_path, "r") as file:
+            description = file.read()
+    except FileNotFoundError:
+        st.error(f"Le fichier '{file_path}' est introuvable.")
+        st.stop()
+
+    # Afficher le contenu du fichier dans l'application
+    st.text_area("Aperçu du contenu :", description, height=200)
+
+    st.write("""
+        Vous pouvez télécharger en dessous une description des données brutes utilisés.
+    """)
+    # Télécharger le fichier texte
+    st.download_button(
+        label="Télécharger le fichier texte",
+        data=description,
+        file_name="description.txt",
+        mime="text/plain"
+    )
 
 # Section Analyse des données
 elif st.session_state.page == "Analyse":
@@ -205,7 +232,32 @@ elif st.session_state.page == "Prédiction":
                 max_value=float(max_val),
                 value=float(min_val)
             )
-    
+
+ # Titre de l'application
+    st.title("Téléchargement d'un fichier texte existant")
+
+# Chemin vers le fichier texte
+file_path = "docs/description.txt"
+
+# Lire le contenu du fichier
+try:
+    with open(file_path, "r") as file:
+        description = file.read()
+except FileNotFoundError:
+    st.error(f"Le fichier '{file_path}' est introuvable.")
+    st.stop()
+
+# Afficher le contenu du fichier dans l'application
+st.text_area("Aperçu du contenu :", description, height=200)
+
+# Télécharger le fichier texte
+st.download_button(
+    label="Télécharger le fichier texte",
+    data=description,
+    file_name="description.txt",
+    mime="text/plain"
+)
+
     # Bouton pour lancer la prédiction
     if st.button("Prédire le Prix"):
         st.write("Lancer la prédiction avec les valeurs suivantes :")
