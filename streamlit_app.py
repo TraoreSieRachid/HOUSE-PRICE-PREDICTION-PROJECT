@@ -294,6 +294,7 @@ elif st.session_state.page == "Performance":
     st.subheader("les performances du modèle ridge")
     st.dataframe(ridge_cv_performance)
     st.write("---")
+    
     #data2 = pipeline.transform(data2)
     #X_test = data2.drop(columns=["Prix de vente de la maison"])  # Remplacer "price" par la colonne cible
     #y_test = data2["Prix de vente de la maison"]  # Assurez-vous que "price" est la colonne cible
