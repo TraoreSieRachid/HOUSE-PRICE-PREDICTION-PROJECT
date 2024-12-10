@@ -317,16 +317,32 @@ elif st.session_state.page == "Performance":
         col.dataframe(df)
         col.write("---")
 
-        #Diagramme en barres pour les performances
-        fig, ax = plt.subplots(figsize=(6, 4))
-        x = range(len(df))
-        bar_width = 0.4
+        # Titre de l'application
+    st.title("Visualisation des performances des modèles")
 
-        ax.bar(x, df["train"], width=bar_width, label="Train", color="skyblue", align="center")
-        ax.bar([p + bar_width for p in x], df["test"], width=bar_width, label="Test", color="salmon", align="center")
-        ax.set_xticks([p + bar_width / 2 for p in x])
-        ax.set_xticklabels(df["metric"], rotation=45, ha="right")
-        ax.set_title(f"Performances du modèle {model_name}")
-        ax.legend()
+    # Affichage des données et graphiques dans une grille
+    cols = st.columns(3)
 
-        st.pyplot(fig)
+    for i, (df, model_name) in enumerate(zip(dataframes, model_names)):
+        col = cols[i % 3]  # Sélectionner la colonne appropriée
+        with col:
+            st.subheader(f"{model_name}")
+            
+            # Afficher le DataFrame
+            st.dataframe(df)
+
+            # Créer un graphique pour les performances
+            fig, ax = plt.subplots(figsize=(6, 4))
+            x = range(len(df))
+            bar_width = 0.4
+
+            ax.bar(x, df["train"], width=bar_width, label="Train", color="skyblue", align="center")
+            ax.bar([p + bar_width for p in x], df["test"], width=bar_width, label="Test", color="salmon", align="center")
+            ax.set_xticks([p + bar_width / 2 for p in x])
+            ax.set_xticklabels(df["metric"], rotation=45, ha="right")
+            ax.set_title(f"Performances : {model_name}")
+            ax.legend()
+
+            # Afficher le graphique
+            st.pyplot(fig)
+            col.write("---")
