@@ -307,18 +307,8 @@ elif st.session_state.page == "Performance":
                 "Gradient Boosting Regressor", "LightGBM", "Voting Regressor",
                 "Stacking Regressor", "XGBoost", "Random Forest Regressor"]
 
-    # Créer une grille avec 3 colonnes
-    cols = st.columns(3)
-
-    # Afficher les DataFrames dans la grille
-    for i, (df, model_name) in enumerate(zip(dataframes, model_names)):
-        col = cols[i % 3]  # Sélectionner la colonne appropriée
-        col.subheader(f"Les performances du modèle {model_name} ")
-        col.dataframe(df)
-        col.write("---")
-
         # Titre de l'application
-    st.title("Visualisation des performances des modèles")
+    st.subheader("Visualisation des performances des modèles")
 
     # Affichage des données et graphiques dans une grille
     cols = st.columns(3)
