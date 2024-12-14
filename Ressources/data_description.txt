@@ -20,7 +20,7 @@ MSSubClass: Identifies the type of dwelling involved in the sale.
 MSZoning: Identifies the general zoning classification of the sale.
 		
        A	Agriculture
-       C	Commercial
+      'C (all)'	Commercial
        FV	Floating Village Residential
        I	Industrial
        RH	Residential High Density
@@ -345,10 +345,7 @@ HeatingQC: Heating quality and condition
        Fa	Fair
        Po	Poor
 		
-CentralAir: Central air conditioning
 
-       N	No
-       Y	Yes
 		
 Electrical: Electrical system
 

@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import seaborn as sns
+import seaborn as sns # type: ignore
 import matplotlib.pyplot as plt
 import joblib
 from sklearn.metrics import mean_absolute_error, mean_squared_error
@@ -34,74 +34,16 @@ def load_data1():
 def load_data2():
     return pd.read_csv("data/test_df.csv")  # Remplacez par le chemin réel de vos données
 
+def load_data3():
+    return pd.read_csv("data/train_df_labelled.csv")  # Remplacez par le chemin réel de vos données
 
-data = load_data1()
-data2 = load_data2()
-labels = {
-    "MSSubClass": "Type de logement impliqué dans la vente",
-    "MSZoning": "Classification générale de zonage de la vente",
-    "LotFrontage": "Longueur linéaire de la rue connectée à la propriété (en pieds)",
-    "LotArea": "Surface du lot (en pieds carrés)",
-    "Street": "Type d'accès routier à la propriété",
-    "LotShape": "Forme générale de la propriété",
-    "LandContour": "Niveau de platitude de la propriété",
-    "Utilities": "Type de services publics disponibles",
-    "LotConfig": "Configuration du lot",
-    "LandSlope": "Pente de la propriété",
-    "Neighborhood": "Localisation physique à l'intérieur des limites de la ville d'Ames",
-    "Condition1": "Proximité à différentes conditions",
-    "Condition2": "Proximité à d'autres conditions (si plus d'une est présente)",
-    "BldgType": "Type de logement",
-    "HouseStyle": "Style du logement",
-    "OverallQual": "Qualité générale des matériaux et finitions de la maison",
-    "OverallCond": "État général de la maison",
-    "RoofStyle": "Style de toit",
-    "RoofMatl": "Matériau du toit",
-    "Exterior1st": "Revêtement extérieur sur le premier étage",
-    "Exterior2nd": "Revêtement extérieur secondaire (si présent)",
-    "MasVnrType": "Type de revêtement de maçonnerie",
-    "MasVnrArea": "Surface du revêtement de maçonnerie (en pieds carrés)",
-    "ExterQual": "Qualité générale des matériaux extérieurs",
-    "ExterCond": "État général des matériaux extérieurs",
-    "Foundation": "Type de fondation",
-    "BsmtQual": "Hauteur du sous-sol",
-    "BsmtCond": "État général du sous-sol",
-    "BsmtExposure": "Degré d'exposition du sous-sol au niveau du sol",
-    "BsmtFinType1": "Qualité du sous-sol aménagé",
-    "BsmtUnfSF": "Surface non aménagée du sous-sol (en pieds carrés)",
-    "Heating": "Type de système de chauffage",
-    "HeatingQC": "Qualité et état du système de chauffage",
-    "CentralAir": "Climatisation centrale (Y: Oui, N: Non)",
-    "Electrical": "Type de système électrique",
-    "LowQualFinSF": "Surface finie de faible qualité (en pieds carrés)",
-    "BedroomAbvGr": "Nombre de chambres au-dessus du niveau du sol",
-    "KitchenAbvGr": "Nombre de cuisines au-dessus du niveau du sol",
-    "KitchenQual": "Qualité de la cuisine",
-    "TotRmsAbvGrd": "Nombre total de pièces au-dessus du niveau du sol (hors salles de bain)",
-    "Functional": "Note de fonctionnalité de la maison",
-    "Fireplaces": "Nombre de cheminées",
-    "FireplaceQu": "Qualité des cheminées",
-    "GarageType": "Localisation du garage",
-    "GarageFinish": "Qualité intérieure du garage",
-    "GarageCars": "Capacité du garage (en nombre de voitures)",
-    "GarageQual": "Qualité générale du garage",
-    "PavedDrive": "Type d'allée pavée",
-    "PoolArea": "Surface de la piscine (en pieds carrés)",
-    "MiscVal": "Valeur des caractéristiques diverses (en dollars)",
-    "MoSold": "Mois de la vente",
-    "SaleType": "Type de vente",
-    "SaleCondition": "Condition de la vente",
-    "SalePrice": "Prix de vente de la maison",
-    "houseage": "Âge de la maison (en années)",
-    "houseremodelage": "Âge depuis la rénovation (en années)",
-    "totalsf": "Surface totale finie (en pieds carrés)",
-    "totalarea": "Surface totale (en pieds carrés)",
-    "totalbaths": "Nombre total de salles de bain",
-    "totalporchsf": "Surface totale des porches (en pieds carrés)"
-}
+def load_data4():
+    return pd.read_csv("data/test_df_labelled.csv")  # Remplacez par le chemin réel de vos données
 
-data=data.rename(columns=labels)
-data2=data2.rename(columns=labels)
+train_df = load_data1()
+test_df = load_data2()
+train_df_labelled= load_data3()
+test_df_labelled= load_data4()
 
 # Initialisation de l'état de la page (si ce n'est pas déjà fait)
 if "page" not in st.session_state:
@@ -195,38 +137,38 @@ elif st.session_state.page == "Analyse":
     # Affichage des données brutes si l'option est activée
     if st.checkbox("Afficher les données brutes"):
         st.subheader("Données des prix immobiliers")
-        st.dataframe(data)
+        st.dataframe(train_df_labelled)
     st.write("---")
 
     # Statistiques descriptives
     st.write("### Statistiques descriptives")
-    st.write(data.describe())
+    st.write(train_df_labelled.describe())
     st.write("---")
 
     # Sélection des variables pour la visualisation
     st.write("### Visualisation de deux variables")
-    variable_x = st.selectbox("Sélectionnez la première variable (axe X)", data.columns)
-    variable_y = st.selectbox("Sélectionnez la deuxième variable (axe Y)", data.columns)
+    variable_x = st.selectbox("Sélectionnez la première variable (axe X)", train_df_labelled.columns)
+    variable_y = st.selectbox("Sélectionnez la deuxième variable (axe Y)", train_df_labelled.columns)
 
     # Visualisation des relations entre les variables
     fig, ax = plt.subplots(figsize=(10, 8))
-    if data[variable_x].dtype in ['int64', 'float64'] and data[variable_y].dtype in ['int64', 'float64']:
-        sns.scatterplot(data=data, x=variable_x, y=variable_y, ax=ax, color="teal", s=100, edgecolor='black')
+    if train_df_labelled[variable_x].dtype in ['int64', 'float64'] and train_df_labelled[variable_y].dtype in ['int64', 'float64']:
+        sns.scatterplot(train_df_labelled=train_df_labelled, x=variable_x, y=variable_y, ax=ax, color="teal", s=100, edgecolor='black')
         ax.set_title(f"Nuage de points entre {variable_x} et {variable_y}", fontsize=16, fontweight='bold')
         ax.set_xlabel(variable_x, fontsize=14)
         ax.set_ylabel(variable_y, fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12)
         ax.grid(True, linestyle='--', alpha=0.7)
-    elif data[variable_x].dtype == 'object' and data[variable_y].dtype == 'object':
-        grouped_data = data.groupby([variable_x, variable_y]).size().unstack()
-        grouped_data.plot(kind='bar', stacked=True, ax=ax, cmap='coolwarm')
+    elif train_df_labelled[variable_x].dtype == 'object' and train_df_labelled[variable_y].dtype == 'object':
+        grouped_train_df_labelled = train_df_labelled.groupby([variable_x, variable_y]).size().unstack()
+        grouped_train_df_labelled.plot(kind='bar', stacked=True, ax=ax, cmap='coolwarm')
         ax.set_title(f"Graphique en barres empilées de {variable_x} par {variable_y}", fontsize=16, fontweight='bold')
         ax.set_xlabel(variable_x, fontsize=14)
         ax.set_ylabel("Effectifs", fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12)
         ax.legend(title=variable_y, fontsize=12)
     else:
-        sns.boxplot(data=data, x=variable_x, y=variable_y, ax=ax, palette="Set2")
+        sns.boxplot(train_df_labelled=train_df_labelled, x=variable_x, y=variable_y, ax=ax, palette="Set2")
         ax.set_title(f"Graphique de boîte de {variable_y} par {variable_x}", fontsize=16, fontweight='bold')
         ax.set_xlabel(variable_x, fontsize=14)
         ax.set_ylabel(variable_y, fontsize=14)
@@ -237,7 +179,7 @@ elif st.session_state.page == "Analyse":
 
     # Matrice de corrélation
     st.write("### Matrice de Corrélation")
-    correlation_matrix = data.select_dtypes(include=['int64', 'float64']).corr()
+    correlation_matrix = train_df_labelled.select_dtypes(include=['int64', 'float64']).corr()
     mask = np.triu(np.ones_like(correlation_matrix, dtype=bool))
     fig_corr, ax_corr = plt.subplots(figsize=(14, 12))
     sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", fmt=".1f", ax=ax_corr, cbar=True, annot_kws={'size': 10}, mask=mask)
@@ -255,16 +197,19 @@ elif st.session_state.page == "Prédiction":
 
     # Création du formulaire
     form_data = {}
-    for col_label in labels.values():
-    # Trouver la clé brute
-        col_raw = reverse_labels[col_label]
-        if data[col_label].dtype == 'object':
+    for col_label in train_df_labelled.columns:
+        col_index = train_df_labelled.columns.get_loc(col_label)
+        col_raw=train_df.columns[col_index]
+
+        if train_df_labelled[col_label].dtype == 'object':
             # Champ de sélection pour les variables catégorielles
-            form_data[col_raw] = st.selectbox(f"{col_label}", data[col_label].unique())
-        elif data[col_label].dtype in ['int64', 'float64']:
+            form_data[col_raw] = st.selectbox(f"{col_label}", train_df_labelled[col_label].unique())
+
+        elif train_df_labelled[col_label].dtype in ['int64', 'float64']:
             # Champ de saisie numérique pour les variables numériques
-            min_val = data[col_label].min()
-            max_val = data[col_label].max()
+            min_val = train_df_labelled[col_label].min()
+            max_val = train_df_labelled[col_label].max()
+
             form_data[col_raw] = st.number_input(
                 f"{col_label}",
                 min_value=float(min_val),
@@ -276,7 +221,8 @@ elif st.session_state.page == "Prédiction":
     if st.button("Prédire le Prix"):
         st.write("Lancer la prédiction avec les valeurs suivantes :")
         input_data = pd.DataFrame([form_data])
-        input_data_label=input_data.rename(columns=labels)
+        col=train_df_labelled.columns
+        input_data_label=input_data.rename(columns=col)
         st.write("Vérification des données d'entrée avant prédiction :", input_data_label)
 
         # Prédiction
@@ -294,7 +240,7 @@ elif st.session_state.page == "Performance":
     
     if st.checkbox("Afficher les données brutes de test"):
         st.subheader("Données des prix immobiliers")
-        st.dataframe(data2)
+        st.dataframe(test_df_labelled)
     st.write("---")
 
     # Liste des DataFrames
