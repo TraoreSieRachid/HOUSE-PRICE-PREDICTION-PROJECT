@@ -190,11 +190,7 @@ elif st.session_state.page == "Analyse":
 # Section Prédiction des prix
 elif st.session_state.page == "Prédiction":
     st.subheader("🔍 Prédiction des Prix")
-    st.write("Utilisez ce formulaire pour entrer les valeurs des caractéristiques et prédire le prix d'une maison.")
-
-    # Inverser le dictionnaire pour trouver les clés brutes à partir des libellés
-    reverse_labels = {v: k for k, v in labels.items()}
-
+    st.write("Utilisez ce formulaire pour entrer les valeurs des caractéristiques et prédire le prix d'une maison.")   
     # Création du formulaire
     form_data = {}
     for col_label in train_df_labelled.columns:
