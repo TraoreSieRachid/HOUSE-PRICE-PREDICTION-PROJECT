@@ -19,8 +19,8 @@ ridge_model = load_ridge_model()
 # Chargement des autres ressources
 pipeline = joblib.load('code/pipeline.pkl')
 data_performances = {
-    "Ridge": joblib.load('code/ridge_cv_performance.pkl'),
     "Linear Regression": joblib.load('code/lr_performance.pkl'),
+    "Ridge": joblib.load('code/ridge_cv_performance.pkl'),
     "CatBoost": joblib.load('code/cat_cv_performance.pkl'),
     "Gradient Boosting Regressor": joblib.load('code/GBR_cv_performance.pkl'),
     "LightGBM": joblib.load('code/lgbm_cv_performance.pkl'),
