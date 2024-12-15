@@ -21,6 +21,8 @@ pipeline = joblib.load('code/pipeline.pkl')
 data_performances = {
     "Linear Regression": joblib.load('code/lr_performance.pkl'),
     "Ridge": joblib.load('code/ridge_cv_performance.pkl'),
+    "Lasso": joblib.load('code/Lasso_cv_performance.pkl'),
+    "ElasticNet": joblib.load('code/ElasticNet_cv_performance.pkl'),
     "CatBoost": joblib.load('code/cat_cv_performance.pkl'),
     "Gradient Boosting Regressor": joblib.load('code/GBR_cv_performance.pkl'),
     "LightGBM": joblib.load('code/lgbm_cv_performance.pkl'),
