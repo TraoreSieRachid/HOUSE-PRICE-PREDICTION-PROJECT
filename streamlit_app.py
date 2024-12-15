@@ -22,7 +22,7 @@ data_performances = {
     "Linear Regression": joblib.load('code/lr_performance.pkl'),
     "Ridge": joblib.load('code/ridge_cv_performance.pkl'),
     "Lasso": joblib.load('code/Lasso_cv_performance.pkl'),
-    "ElasticNet": joblib.load('code/ElasticNet_cv_performance.pkl'),
+    "ElasticNet": joblib.load('code/ElasticNet_cv_performance.pkl')
     "CatBoost": joblib.load('code/cat_cv_performance.pkl'),
     "Gradient Boosting Regressor": joblib.load('code/GBR_cv_performance.pkl'),
     "LightGBM": joblib.load('code/lgbm_cv_performance.pkl'),
@@ -171,7 +171,7 @@ elif st.session_state.page == "Prédiction":
 # Section Performance
 elif st.session_state.page == "Performance":
     st.subheader("📈 Performance des Modèles")
-    cols = st.columns(3)
+    cols = st.columns(4)
     for i, (model_name, performance_df) in enumerate(data_performances.items()):
         col = cols[i % 3]
         with col:
